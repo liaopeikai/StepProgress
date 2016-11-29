@@ -12,9 +12,9 @@
 
 /*
  *  frame:传入的CGRect决定了progressView的位置及大小
- *  withTitleArray:传入节点数组
+ *  targetNumber:传入时间节点数目
  */
-- (instancetype)initWithFrame:(CGRect)frame withTitleArray:(NSArray *)titleArray;
+- (instancetype)initWithFrame:(CGRect)frame targetNumber:(NSInteger)targetNumber;
 
 /*
  *  progress:当前进度

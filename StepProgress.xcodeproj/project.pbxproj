@@ -442,7 +442,7 @@
 				DEVELOPMENT_TEAM = B3XEHWV42U;
 				INFOPLIST_FILE = StepProgress/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.beichende.StepProgress;
+				PRODUCT_BUNDLE_IDENTIFIER = com.beichende.CustomKeyboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -454,7 +454,7 @@
 				DEVELOPMENT_TEAM = B3XEHWV42U;
 				INFOPLIST_FILE = StepProgress/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.beichende.StepProgress;
+				PRODUCT_BUNDLE_IDENTIFIER = com.beichende.CustomKeyboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

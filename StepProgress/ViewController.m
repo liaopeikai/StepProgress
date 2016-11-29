@@ -18,14 +18,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSArray *titleArr=@[@"申请受理",@"资料处理",@"审核中",@"审核完成"];
+    [self initStepProgressView];
+    
+}
+
+- (void)initStepProgressView{
+    
     StepProgressView *stepView = [[StepProgressView alloc]init];
-    stepView = [stepView initWithFrame:CGRectMake(10, 100, self.view.bounds.size.width-20, 60) withTitleArray:titleArr];
+    
+    stepView = [stepView initWithFrame:CGRectMake(10, 100, self.view.bounds.size.width-20, 20) targetNumber:5];
     [stepView setProgress:2];
     
     [self.view addSubview:stepView];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

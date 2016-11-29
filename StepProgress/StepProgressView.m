@@ -8,85 +8,79 @@
 
 #import "StepProgressView.h"
 
-static const float imgBtnWidth = 18;
+static NSInteger targetNum;
+static CGFloat progressNum;
 
 @interface StepProgressView ()
-
-@property (nonatomic,strong) UIProgressView *progressView;
-
-// 用来存放按钮,用UIButton防止以后有点击事件
-@property (nonatomic,strong) NSMutableArray *imgBtnArray;
 
 @end
 
 @implementation StepProgressView
 
-
-- (instancetype)initWithFrame:(CGRect)frame withTitleArray:(NSArray *)titleArray
-{
+- (instancetype)initWithFrame:(CGRect)frame targetNumber:(NSInteger)targetNumber{
+    
+    // 保存传进来的参数
+    targetNum = targetNumber;
+    
     StepProgressView *stepProgressView = [[StepProgressView alloc]initWithFrame:frame];
-    // 进度条
-    stepProgressView.progressView = [[UIProgressView alloc]initWithFrame:CGRectMake(36, 5, frame.size.width-72, 10)];
-    stepProgressView.progressView.progressViewStyle = UIProgressViewStyleBar;
-    stepProgressView.progressView.transform = CGAffineTransformMakeScale(1.0f,2.0f);
-    stepProgressView.progressView.progressTintColor = [UIColor greenColor];
-    stepProgressView.progressView.trackTintColor = [UIColor lightGrayColor];
+    [stepProgressView setBackgroundColor:[UIColor clearColor]];
     
-    [stepProgressView addSubview:stepProgressView.progressView];
-    
-    stepProgressView.imgBtnArray = [[NSMutableArray alloc]init];
-    float _btnWidth = frame.size.width/(titleArray.count);
-    for(int i = 0; i < titleArray.count; i++) {
-        // 图片按钮
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btn setImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateNormal];
-        [btn setImage:[UIImage imageNamed:@"0.png"] forState:UIControlStateSelected];
-        btn.frame = CGRectMake(_btnWidth/2+_btnWidth*i-imgBtnWidth/2, 0, imgBtnWidth, imgBtnWidth);
-        btn.selected = NO;
-        
-        [stepProgressView addSubview:btn];
-        [stepProgressView.imgBtnArray addObject:btn];
-        
-        // 文字
-        UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(btn.center.x-_btnWidth/2, frame.size.height-20, _btnWidth, 20)];
-        titleLabel.text = [titleArray objectAtIndex:i];
-        [titleLabel setTextColor:[UIColor blackColor]];
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.font = [UIFont systemFontOfSize:18];
-        [stepProgressView addSubview:titleLabel];
-    }
     return stepProgressView;
 }
 
-
--(void)setProgress:(CGFloat)progress
-{
-    // stepIndex默认为－1 小于－1为－1 大于总数为总数
-    progress = progress<-1?-1:progress;
-    progress = progress>=(NSInteger)_imgBtnArray.count-1?_imgBtnArray.count-1:progress;
-    
-    float _btnWidth = self.bounds.size.width/(_imgBtnArray.count);
-    for(int i = 0; i < _imgBtnArray.count; i++) {
-        UIButton *btn = [_imgBtnArray objectAtIndex:i];
-        if (i <= progress) {
-            btn.selected = YES;
-        }
-        else{
-            btn.selected = NO;
-        }
-    }
-    if(progress == -1) {
-        self.progressView.progress = 0.0;
-    }
-    else if(progress == _imgBtnArray.count-1)
-    {
-        self.progressView.progress = 1.0;
-    }
-    else
-    {
-        self.progressView.progress = (0.5+progress)*_btnWidth/self.frame.size.width;
-    }
+- (void)setProgress:(CGFloat)progress{
+    progressNum = progress;
 }
 
+- (void)drawRect:(CGRect)rect{
+    
+    // 线宽
+    CGFloat lineWidth = 4.0f;
+    // 圆的直径
+    CGFloat circleDiameter = rect.size.height-lineWidth;
+    // 节点间线段距离
+    CGFloat distanceBetweenTwoPoints = (rect.size.width-(targetNum*rect.size.height))/(targetNum-1);
+    
+    NSLog(@"rect.size.width:%f",rect.size.width);
+    NSLog(@"targetNum:%ld",(long)targetNum);
+    NSLog(@"progressNum:%ld",(long)progressNum);
+    NSLog(@"distanceBetweenTwoPoints:%f", distanceBetweenTwoPoints);
+    
+    for (NSInteger i = 0; i < targetNum; i ++) {
+        // 获取上下文
+        CGContextRef ctx = UIGraphicsGetCurrentContext();
+        // 画圈
+        CGContextAddEllipseInRect(ctx, CGRectMake(lineWidth/2+(rect.size.height+distanceBetweenTwoPoints)*i, lineWidth/2, circleDiameter, circleDiameter));
+        // 线的宽度
+        CGContextSetLineWidth(ctx, lineWidth);
+        // 颜色
+        if (i < progressNum) {
+            [[UIColor greenColor] set];
+        }else{
+            [[UIColor grayColor] set];
+        }
+        CGContextStrokePath(ctx);
+        
+        // 直线起点
+        CGContextMoveToPoint(ctx, rect.size.height+(distanceBetweenTwoPoints+rect.size.height)*i, circleDiameter/2+lineWidth/2);
+        // 终点
+        CGContextAddLineToPoint(ctx, (distanceBetweenTwoPoints+rect.size.height)+(distanceBetweenTwoPoints+rect.size.height)*i, circleDiameter/2+lineWidth/2);
+        // 颜色
+        if (i < progressNum) {
+            [[UIColor greenColor] set];
+        }else{
+            [[UIColor grayColor] set];
+        }
+        // 线的宽度
+        CGContextSetLineWidth(ctx, lineWidth);
+        // 起点和重点圆角
+        CGContextSetLineCap(ctx, kCGLineCapRound);
+        // 转角圆角
+        CGContextSetLineJoin(ctx, kCGLineJoinRound);
+        // 渲染（直线只能绘制空心的，不能调用CGContextFillPath(ctx);）
+        CGContextStrokePath(ctx);
+    }
+
+}
 
 @end
