@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		423D44401DC19560009B1F28 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 423D443E1DC19560009B1F28 /* 1.png */; };
 		423D44411DC19560009B1F28 /* 0.png in Resources */ = {isa = PBXBuildFile; fileRef = 423D443F1DC19560009B1F28 /* 0.png */; };
+		423DAA5B1DF7E0A60009D553 /* DynamicStepProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 423DAA5A1DF7E0A60009D553 /* DynamicStepProgressView.m */; };
 		42CA4EF91DC0C51000B47E3B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CA4EF81DC0C51000B47E3B /* main.m */; };
 		42CA4EFC1DC0C51000B47E3B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CA4EFB1DC0C51000B47E3B /* AppDelegate.m */; };
 		42CA4EFF1DC0C51000B47E3B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CA4EFE1DC0C51000B47E3B /* ViewController.m */; };
@@ -40,6 +41,8 @@
 /* Begin PBXFileReference section */
 		423D443E1DC19560009B1F28 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		423D443F1DC19560009B1F28 /* 0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0.png; sourceTree = "<group>"; };
+		423DAA591DF7E0A60009D553 /* DynamicStepProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicStepProgressView.h; sourceTree = "<group>"; };
+		423DAA5A1DF7E0A60009D553 /* DynamicStepProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicStepProgressView.m; sourceTree = "<group>"; };
 		42CA4EF41DC0C51000B47E3B /* StepProgress.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepProgress.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42CA4EF81DC0C51000B47E3B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		42CA4EFA1DC0C51000B47E3B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -114,6 +117,8 @@
 				42CA4EFE1DC0C51000B47E3B /* ViewController.m */,
 				42CA4F691DC0D1C000B47E3B /* StepProgressView.h */,
 				42CA4F6A1DC0D1C000B47E3B /* StepProgressView.m */,
+				423DAA591DF7E0A60009D553 /* DynamicStepProgressView.h */,
+				423DAA5A1DF7E0A60009D553 /* DynamicStepProgressView.m */,
 				42CA4F001DC0C51000B47E3B /* Main.storyboard */,
 				42CA4F031DC0C51000B47E3B /* Assets.xcassets */,
 				42CA4F051DC0C51000B47E3B /* LaunchScreen.storyboard */,
@@ -290,6 +295,7 @@
 				42CA4EFF1DC0C51000B47E3B /* ViewController.m in Sources */,
 				42CA4F6B1DC0D1C000B47E3B /* StepProgressView.m in Sources */,
 				42CA4EFC1DC0C51000B47E3B /* AppDelegate.m in Sources */,
+				423DAA5B1DF7E0A60009D553 /* DynamicStepProgressView.m in Sources */,
 				42CA4EF91DC0C51000B47E3B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,7 +391,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -427,7 +433,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

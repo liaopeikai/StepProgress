@@ -8,47 +8,62 @@
 
 #import "StepProgressView.h"
 
-static NSInteger targetNum;
-static CGFloat progressNum;
-
 @interface StepProgressView ()
+
+@property (nonatomic ,assign) NSInteger targetNum;
+@property (nonatomic, assign) CGFloat progressNum;
 
 @end
 
 @implementation StepProgressView
 
-- (instancetype)initWithFrame:(CGRect)frame targetNumber:(NSInteger)targetNumber{
-    
-    // 保存传进来的参数
-    targetNum = targetNumber;
-    
-    StepProgressView *stepProgressView = [[StepProgressView alloc]initWithFrame:frame];
-    [stepProgressView setBackgroundColor:[UIColor clearColor]];
-    
-    return stepProgressView;
+- (instancetype)initWithFrame:(CGRect)frame targetNumber:(NSInteger)targetNumber
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        _targetNum = targetNumber;
+        [self setBackgroundColor:[UIColor clearColor]];
+        [self setProgress:0];
+    }
+    return self;
 }
 
-- (void)setProgress:(CGFloat)progress{
-    progressNum = progress;
+- (void)setProgress:(CGFloat)progress
+{
+    if (progress < 0) {
+        progress = 0;
+    }
+    
+    if (progress > self.targetNum) {
+        progress = self.targetNum;
+    }
+    
+    _progressNum = progress;
+    [self setNeedsDisplay];
 }
 
-- (void)drawRect:(CGRect)rect{
+- (void)drawRect:(CGRect)rect
+{
+    
+    NSInteger targetNum = self.targetNum;
+    CGFloat progressNum = self.progressNum;
     
     // 线宽
     CGFloat lineWidth = 4.0f;
     // 圆的直径
     CGFloat circleDiameter = rect.size.height-lineWidth;
     // 节点间线段距离
-    CGFloat distanceBetweenTwoPoints = (rect.size.width-(targetNum*rect.size.height))/(targetNum-1);
+    CGFloat distanceBetweenTwoPoints = (rect.size.width - (targetNum*rect.size.height)) / (targetNum - 1);
     
     NSLog(@"rect.size.width:%f",rect.size.width);
     NSLog(@"targetNum:%ld",(long)targetNum);
     NSLog(@"progressNum:%ld",(long)progressNum);
     NSLog(@"distanceBetweenTwoPoints:%f", distanceBetweenTwoPoints);
     
+    // 获取上下文
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    
     for (NSInteger i = 0; i < targetNum; i ++) {
-        // 获取上下文
-        CGContextRef ctx = UIGraphicsGetCurrentContext();
         // 画圈
         CGContextAddEllipseInRect(ctx, CGRectMake(lineWidth/2+(rect.size.height+distanceBetweenTwoPoints)*i, lineWidth/2, circleDiameter, circleDiameter));
         // 线的宽度
